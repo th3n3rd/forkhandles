@@ -5,13 +5,13 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
 
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm")
     jacoco
     `java-library`
     `maven-publish`
     signing
-    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
-    id("com.github.kt3k.coveralls") version "2.12.2"
+    id("io.github.gradle-nexus.publish-plugin")
+    id("com.github.kt3k.coveralls")
     id("org.jetbrains.kotlin.plugin.serialization")
     id("io.codearte.nexus-staging")
 }
@@ -22,7 +22,7 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
+        classpath(Kotlin.gradlePlugin)
         classpath("com.github.kt3k.coveralls:com.github.kt3k.coveralls.gradle.plugin:_")
     }
 }
