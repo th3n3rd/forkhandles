@@ -17,6 +17,7 @@ import dev.forkhandles.values.LongValue
 import dev.forkhandles.values.LongValueFactory
 import dev.forkhandles.values.StringValue
 import dev.forkhandles.values.StringValueFactory
+import dev.forkhandles.values.minValue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import strikt.api.expectThat
@@ -77,7 +78,7 @@ interface MainClassFields<C : ChildFields<G>, G : GrandchildFields, CONTENT> {
 }
 
 class LongType private constructor(value: Long) : LongValue(value) {
-    companion object : LongValueFactory<LongType>(::LongType)
+    companion object : LongValueFactory<LongType>(::LongType, 0L.minValue)
 }
 
 class BooleanType private constructor(value: Boolean) : BooleanValue(value) {

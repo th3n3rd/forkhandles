@@ -163,7 +163,7 @@ abstract class DataContainer<DATA>(
 
     private fun <IN : Any, OUT : Value<IN>> ValueFactory<OUT, IN>.parse(): (IN) -> OUT = {
         when (it) {
-            is String -> parse(it)
+            is String, is Boolean, is Number -> parse(it.toString())
             else -> of(it)
         }
     }

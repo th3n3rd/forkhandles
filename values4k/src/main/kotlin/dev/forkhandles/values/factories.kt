@@ -3,6 +3,7 @@ package dev.forkhandles.values
 import java.io.File
 import java.math.BigDecimal
 import java.math.BigInteger
+import java.net.URI
 import java.net.URL
 import java.time.Duration
 import java.time.Instant
@@ -24,8 +25,8 @@ import java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME
 import java.time.format.DateTimeFormatter.ISO_OFFSET_TIME
 import java.time.format.DateTimeFormatter.ISO_ZONED_DATE_TIME
 import java.time.format.DateTimeFormatter.ofPattern
-import java.util.UUID
 import java.util.Base64
+import java.util.UUID
 
 
 private val rfcBase64Alphabet get() = "^[0-9A-Za-z+/=]+$".toRegex() // https://www.rfc-editor.org/rfc/rfc4648.html#section-4
@@ -129,7 +130,7 @@ open class UUIDValueFactory<DOMAIN : Value<UUID>>(
 
 open class URLValueFactory<DOMAIN : Value<URL>>(
     fn: (URL) -> DOMAIN, validation: Validation<URL>? = null
-) : ValueFactory<DOMAIN, URL>(fn, validation, ::URL)
+) : ValueFactory<DOMAIN, URL>(fn, validation, { URI.create(it).toURL() })
 
 open class DurationValueFactory<DOMAIN : Value<Duration>>(
     fn: (Duration) -> DOMAIN, validation: Validation<Duration>? = null
@@ -195,3 +196,4 @@ open class ZonedDateTimeValueFactory<DOMAIN : Value<ZonedDateTime>>(
 open class FileValueFactory<DOMAIN : Value<File>>(
     fn: (File) -> DOMAIN, validation: Validation<File>? = null
 ) : ValueFactory<DOMAIN, File>(fn, validation, { File(it) })
+
