@@ -13,6 +13,8 @@ import dev.forkhandles.values.IntValue
 import dev.forkhandles.values.IntValueFactory
 import dev.forkhandles.values.LocalDateValue
 import dev.forkhandles.values.LocalDateValueFactory
+import dev.forkhandles.values.LongValue
+import dev.forkhandles.values.LongValueFactory
 import dev.forkhandles.values.StringValue
 import dev.forkhandles.values.StringValueFactory
 import org.junit.jupiter.api.Test
@@ -68,14 +70,14 @@ interface MainClassFields<C : ChildFields<G>, G : GrandchildFields, CONTENT> {
     var optionalData: CONTENT?
     var requiredData: CONTENT
 
-    var intValue: IntType?
+    var longValue: LongType?
     var booleanValue: BooleanType
     var stringValue: StringType
     var localDateValue: LocalDateType
 }
 
-class IntType private constructor(value: Int) : IntValue(value) {
-    companion object : IntValueFactory<IntType>(::IntType)
+class LongType private constructor(value: Long) : LongValue(value) {
+    companion object : LongValueFactory<LongType>(::LongType)
 }
 
 class BooleanType private constructor(value: Boolean) : BooleanValue(value) {
@@ -134,7 +136,7 @@ abstract class DataContainerContract<C : ChildFields<G>, G : GrandchildFields, C
                 "stringValue" to "stringValue",
                 "booleanValue" to true,
                 "localDateValue" to "1999-12-31",
-                "intValue" to 1,
+                "longValue" to 1,
             )
         )
 
@@ -153,7 +155,7 @@ abstract class DataContainerContract<C : ChildFields<G>, G : GrandchildFields, C
         expectThrows<ClassCastException> { container(mapOf("mapped" to 123)).mapped }
         expectThat(input.value).isEqualTo(MyType.of(123))
         expectThat(input.stringValue).isEqualTo(StringType.of("stringValue"))
-        expectThat(input.intValue).isEqualTo(IntType.of(1))
+        expectThat(input.longValue).isEqualTo(LongType.of(1))
         expectThat(input.localDateValue).isEqualTo(LocalDateType.of(of(1999, 12, 31)))
         expectThat(input.booleanValue).isEqualTo(BooleanType.of(true))
 
@@ -181,7 +183,7 @@ abstract class DataContainerContract<C : ChildFields<G>, G : GrandchildFields, C
                 "localDateValue" to "1999-12-31",
                 "stringValue" to "stringValue",
                 "booleanValue" to true,
-                "intValue" to 1
+                "longValue" to 1
             )
         )
 
@@ -192,7 +194,7 @@ abstract class DataContainerContract<C : ChildFields<G>, G : GrandchildFields, C
         expectSetWorks(input::long, 0)
         expectSetWorks(input::double, 5.4536)
         expectSetWorks(input::stringValue, StringType.of("123"))
-        expectSetWorks(input::intValue, IntType.of(123))
+        expectSetWorks(input::longValue, LongType.of(123))
         expectSetWorks(input::localDateValue, LocalDateType.of(of(1999, 12, 12)))
         expectSetWorks(input::booleanValue, BooleanType.of(false))
 

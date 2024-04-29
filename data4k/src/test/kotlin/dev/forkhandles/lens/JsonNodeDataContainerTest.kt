@@ -40,7 +40,7 @@ class TopNode(node: JsonNode) : JsonNodeDataContainer(node), MainClassFields<Chi
     override var mapped by required(String::toInt, Int::toString, foo, bar)
     override var requiredData by requiredData(foo, bar)
 
-    override var intValue by optional(IntType)
+    override var longValue by optional(LongType)
     override var stringValue by required(StringType)
     override var localDateValue by required(LocalDateType)
     override var booleanValue by required(BooleanType)

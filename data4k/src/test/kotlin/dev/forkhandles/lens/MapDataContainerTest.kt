@@ -43,7 +43,7 @@ class MapBacked(map: MutableMap<String, Any?>) : MapDataContainer(map),
     override var value by required(MyType, foo, bar)
     override var requiredData by requiredData(foo, bar)
 
-    override var intValue by optional(IntType)
+    override var longValue by optional(LongType)
     override var stringValue by required(StringType)
     override var localDateValue by required(LocalDateType)
     override var booleanValue by required(BooleanType)
