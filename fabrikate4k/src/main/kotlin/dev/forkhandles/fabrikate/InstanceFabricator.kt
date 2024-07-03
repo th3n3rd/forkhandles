@@ -62,13 +62,18 @@ class InstanceFabricator(private val fabrikate: Fabrikate) {
         type: KType,
     ): List<Pair<KFunction<Any>, (KParameter) -> Any?>> {
         val allConstructors = classRef.constructors
-        val hiddenConstructors = allConstructors.filter { constructor -> constructor.annotations.isNotEmpty() &&
-            (constructor.annotations.filterIsInstance<Deprecated>().first().level == DeprecationLevel.HIDDEN) }
-        val nonHidden = allConstructors.filterNot { hiddenConstructors.contains(it) }
-        val selectedConstructors = if (nonHidden.isNotEmpty()) {nonHidden} else{hiddenConstructors}
+        val hiddenConstructors = allConstructors.filter { constructor ->
+            constructor.annotations.isNotEmpty() &&
+                (constructor.annotations.filterIsInstance<Deprecated>().first().level == DeprecationLevel.HIDDEN)
+        }
+        val nonHidden = allConstructors.filterNot(hiddenConstructors::contains).filterNot(::isNotKotlinXSerialisation)
+
+        val selectedConstructors = nonHidden.ifEmpty { hiddenConstructors }
         return selectedConstructors.shuffled(config.random)
             .map { it to { param: KParameter -> makeRandomInstanceForParam(param.type, classRef, type) } }
     }
+
+    private fun isNotKotlinXSerialisation(it: KFunction<Any>) = it.toString().contains("SerializationConstructorMarker")
 
     private fun makeRandomInstanceForParam(
         paramType: KType,

@@ -3,6 +3,12 @@
 This list is not intended to be all-encompassing - it will document major and breaking API changes with their rationale
 when appropriate:
 
+### v2.19.0.0
+- **all** : Upgrade of dependencies including Kotlin to v2 and gradle.
+- **result4k** : Add fold and bidimap functions
+
+- **data4k** [Fix] Problem with deserialisation of numeric value types (due to int/long coercion by Jackson
+
 ### v2.18.0.1
 - **data4k** [Fix] Problem with deserialisation of numeric value types (due to int/long coercion by Jackson
 

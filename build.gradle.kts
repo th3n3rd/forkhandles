@@ -1,7 +1,8 @@
 import groovy.namespace.QName
 import groovy.util.Node
 import org.gradle.api.JavaVersion.VERSION_1_8
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 import java.net.URI
 
 plugins {
@@ -49,9 +50,9 @@ allprojects {
     }
 
     tasks {
-        withType<KotlinCompile> {
-            kotlinOptions {
-                jvmTarget = "1.8"
+        withType<KotlinJvmCompile>().configureEach {
+            compilerOptions {
+                jvmTarget.set(JVM_1_8)
             }
         }
 
@@ -227,13 +228,6 @@ fun Node.childrenCalled(wanted: String) = children()
         val name = it.name()
         (name is QName) && name.localPart == wanted
     }
-
-tasks.named<KotlinCompile>("compileTestKotlin") {
-    kotlinOptions {
-        jvmTarget = "1.8"
-        freeCompilerArgs += listOf("-Xjvm-default=all")
-    }
-}
 
 fun hasCodeCoverage(project: Project) = project.name != "forkhandles-bom" &&
     !project.name.endsWith("generator")
