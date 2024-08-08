@@ -37,6 +37,7 @@ include("partial4k")
     includeModule("core")
     includeSubModule("kotest")
     includeSubModule("hamkrest")
+    includeSubModule("strikt")
 }
 
 include("state4k")

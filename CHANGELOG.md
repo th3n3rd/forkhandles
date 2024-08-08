@@ -4,6 +4,10 @@ This list is not intended to be all-encompassing - it will document major and br
 when appropriate:
 
 ### v2.19.0.0
+- **all** : Upgrade of dependencies including Kotlin to v2.0.10, and gradle to 8.9
+- **result4k-strikt** : [New module] Assertions for Strikt. H/T @potfur
+
+### v2.19.0.0
 - **all** : Upgrade of dependencies including Kotlin to v2 and gradle.
 - **result4k** : Add fold and bidimap functions
 
