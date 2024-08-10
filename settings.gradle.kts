@@ -40,6 +40,7 @@ include("partial4k")
     includeSubModule("strikt")
 }
 
+include("ropes4k")
 include("state4k")
 include("time4k")
 include("tuples4k")
