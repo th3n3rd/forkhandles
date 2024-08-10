@@ -3,6 +3,9 @@
 This list is not intended to be all-encompassing - it will document major and breaking API changes with their rationale
 when appropriate:
 
+### v2.20.0.0
+- **ropes4k**: [New Library] rope implementation for kotlin
+
 ### v2.19.0.0
 - **all** : Upgrade of dependencies including Kotlin to v2.0.10, and gradle to 8.9
 - **result4k-strikt** : [New module] Assertions for Strikt. H/T @potfur
